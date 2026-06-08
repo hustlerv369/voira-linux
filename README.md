@@ -1,11 +1,18 @@
-# Voira for Linux
+<div align="center">
 
-> 🎙️ **Mluv a piš všude.** První čistě česká voice-to-text aplikace pro Linux (a Windows, Mac). Drž klávesu, mluv, pusť — text se vloží do aktivního okna kdekoliv.
+<img src="assets/banner.png" alt="Voira — mluv a piš, česká voice-to-text appka pro Linux" width="820">
 
-[![Latest Release](https://img.shields.io/github/v/release/hustlerv369/voira-linux?style=flat-square&color=E11D2A)](https://github.com/hustlerv369/voira-linux/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/hustlerv369/voira-linux/total?style=flat-square&color=E11D2A)](https://github.com/hustlerv369/voira-linux/releases)
-[![License](https://img.shields.io/badge/license-Proprietary-blue.svg?style=flat-square)](LICENSE)
-[![Website](https://img.shields.io/badge/web-voiravoice.cz-E11D2A?style=flat-square)](https://voiravoice.cz)
+### 🎙️ Mluv a piš všude.
+
+První čistě česká **voice-to-text** aplikace pro Linux (a Windows, Mac).<br>
+Drž klávesu, mluv, pusť — text se vloží do aktivního okna kdekoliv.
+
+[![Latest Release](https://img.shields.io/github/v/release/hustlerv369/voira-linux?style=for-the-badge&color=E11D2A&labelColor=0D0B0C)](https://github.com/hustlerv369/voira-linux/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/hustlerv369/voira-linux/total?style=for-the-badge&color=E11D2A&labelColor=0D0B0C)](https://github.com/hustlerv369/voira-linux/releases)
+[![License](https://img.shields.io/badge/license-Proprietary-555?style=for-the-badge&labelColor=0D0B0C)](LICENSE)
+[![Website](https://img.shields.io/badge/web-voiravoice.cz-E11D2A?style=for-the-badge&labelColor=0D0B0C)](https://voiravoice.cz)
+
+</div>
 
 ---
 
