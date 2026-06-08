@@ -1,0 +1,139 @@
+name: Mirror release from upstream
+
+# Triggered manually when new Voira Linux release is ready.
+# Downloads signed artifacts from voiravoice.cz and creates a GitHub Release
+# with proper notes. This keeps source-of-truth on voiravoice.cz CDN, but
+# GitHub Releases page mirrors them for Linux discoverability + direct
+# downloads via API.
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag (e.g. 0.1.9)'
+        required: true
+        type: string
+      notes:
+        description: 'Release notes (markdown)'
+        required: false
+        type: string
+        default: 'See [voiravoice.cz](https://voiravoice.cz) for changelog.'
+      prerelease:
+        description: 'Mark as pre-release?'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  mirror-release:
+    name: Mirror Linux artifacts to GitHub Releases
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download Linux artifacts from voiravoice.cz CDN
+        run: |
+          mkdir -p release/
+          cd release/
+
+          # AppImage (universal)
+          curl -LO https://voiravoice.cz/downloads/Voira-linux.AppImage
+          curl -LO https://voiravoice.cz/downloads/Voira-linux.AppImage.sig
+
+          # .deb (Debian/Ubuntu family)
+          curl -LO https://voiravoice.cz/downloads/Voira-linux.deb
+          curl -LfO https://voiravoice.cz/downloads/Voira-linux.deb.sig || echo "No .deb.sig"
+
+          # .rpm (RedHat/Fedora family)
+          curl -LO https://voiravoice.cz/downloads/Voira-linux.rpm
+          curl -LfO https://voiravoice.cz/downloads/Voira-linux.rpm.sig || echo "No .rpm.sig"
+
+          echo "=== Downloaded artifacts ==="
+          ls -la
+          echo ""
+          echo "=== SHA256 checksums ==="
+          sha256sum *
+
+      - name: Generate CHECKSUMS.txt
+        run: |
+          cd release/
+          sha256sum *.AppImage *.deb *.rpm > CHECKSUMS.txt
+          cat CHECKSUMS.txt
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ inputs.version }}
+          name: Voira v${{ inputs.version }} for Linux
+          body: |
+            # Voira v${{ inputs.version }} — Linux
+
+            ${{ inputs.notes }}
+
+            ## Quick install
+
+            ### AppImage (universal)
+            ```bash
+            curl -LO https://github.com/${{ github.repository }}/releases/download/v${{ inputs.version }}/Voira-linux.AppImage
+            chmod +x Voira-linux.AppImage
+            ./Voira-linux.AppImage
+            ```
+
+            ### Debian/Ubuntu/Mint
+            ```bash
+            curl -LO https://github.com/${{ github.repository }}/releases/download/v${{ inputs.version }}/Voira-linux.deb
+            sudo apt install ./Voira-linux.deb
+            ```
+
+            ### Fedora/openSUSE
+            ```bash
+            curl -LO https://github.com/${{ github.repository }}/releases/download/v${{ inputs.version }}/Voira-linux.rpm
+            sudo dnf install ./Voira-linux.rpm
+            ```
+
+            ### Arch (AUR)
+            ```bash
+            yay -S voira-bin
+            ```
+
+            ## Signatures
+
+            Verify Ed25519 signature with [minisign](https://jedisct1.github.io/minisign/):
+            ```bash
+            minisign -Vm Voira-linux.AppImage -P RWRoTMBRiASK1+8qfemHn4enR2LtrzNaKh/fooQJwqi+qKN3ympt
+            ```
+
+            Public key fingerprint: `D78A048851C04C68`
+
+            See [SECURITY.md](https://github.com/${{ github.repository }}/blob/main/SECURITY.md) for details.
+
+            ## Checksums
+
+            See `CHECKSUMS.txt` attached.
+
+            ---
+
+            **Website:** https://voiravoice.cz
+            **Bug reports:** https://github.com/${{ github.repository }}/issues
+          files: |
+            release/Voira-linux.AppImage
+            release/Voira-linux.AppImage.sig
+            release/Voira-linux.deb
+            release/Voira-linux.rpm
+            release/CHECKSUMS.txt
+          draft: false
+          prerelease: ${{ inputs.prerelease }}
+          fail_on_unmatched_files: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Summary
+        run: |
+          echo "## ✅ Release v${{ inputs.version }} created" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Release page:** https://github.com/${{ github.repository }}/releases/tag/v${{ inputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Downloads:** AppImage + .deb + .rpm + signatures + CHECKSUMS.txt" >> $GITHUB_STEP_SUMMARY

@@ -1,0 +1,40 @@
+name: 📦 Packaging Improvement
+description: Suggest improvements to Linux packaging (AUR, Flatpak, Snap, Nix, etc.)
+labels: ["packaging"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Want to help with Linux packaging? PR-driven contributions welcome!
+
+  - type: dropdown
+    id: package-format
+    attributes:
+      label: Package format
+      options:
+        - AUR (Arch User Repository)
+        - Flatpak (Flathub)
+        - Snap (snapcraft.io)
+        - NixOS / Home Manager
+        - Distrobox / Toolbox
+        - APKBUILD (Alpine)
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: What needs to happen? Link to draft PKGBUILD / spec / manifest if you have one.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Are you willing to contribute?
+      options:
+        - label: I can submit a PR with the packaging files
+        - label: I can help test on my distro
+        - label: I can maintain the package long-term

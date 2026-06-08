@@ -1,0 +1,41 @@
+name: ✨ Feature Request
+description: Suggest a feature or improvement for Voira on Linux
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a feature! Please describe what you'd like Voira to do.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: Describe the use case or pain point.
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: How should Voira solve this?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any other approaches?
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Personal priority
+      options:
+        - "Nice to have"
+        - "Would significantly improve my workflow"
+        - "Critical — I can't use Voira without it"
+    validations:
+      required: true

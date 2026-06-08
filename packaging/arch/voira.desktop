@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Voira
+Comment=Mluv a piš — česká voice-to-text appka
+Exec=/opt/voira/voira.AppImage %U
+Icon=voira
+Terminal=false
+Type=Application
+Categories=Utility;Office;AudioVideo;
+Keywords=voice;dictation;speech;transcription;czech;voira;mluv;
+StartupWMClass=voira

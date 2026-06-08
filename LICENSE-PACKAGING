@@ -1,0 +1,35 @@
+MIT License
+
+Copyright (c) 2026 Vojtěch Hořava
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of the Linux packaging files in this repository (the "Packaging"), to deal
+in the Packaging without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Packaging, and to permit persons to whom the Packaging is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Packaging.
+
+This license applies ONLY to:
+  - PKGBUILD and .SRCINFO files (packaging/arch/)
+  - Debian packaging config (debian/)
+  - RPM spec files (rpm/)
+  - GitHub Actions workflows (.github/workflows/)
+  - Installation and build scripts (scripts/)
+  - README.md, CONTRIBUTING.md, SECURITY.md, and other documentation
+
+It does NOT apply to:
+  - The Voira application binaries (.AppImage, .deb, .rpm) distributed
+    via GitHub Releases — those are licensed under the separate
+    proprietary LICENSE.
+  - Voira logo, icons, and branding assets.
+
+THE PACKAGING IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE PACKAGING OR THE USE OR OTHER
+DEALINGS IN THE PACKAGING.

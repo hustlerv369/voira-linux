@@ -1,0 +1,104 @@
+name: 🐛 Bug Report
+description: Report a Linux-specific issue with Voira
+labels: ["bug", "linux"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill in the details below.
+
+        **Before submitting:** check [README.md Troubleshooting](https://github.com/hustlerv369/voira-linux#-troubleshooting) and existing issues.
+
+  - type: dropdown
+    id: install-method
+    attributes:
+      label: Install method
+      options:
+        - AppImage
+        - .deb (apt/dpkg)
+        - .rpm (dnf/yum/zypper)
+        - AUR (yay/paru/pacman)
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: voira-version
+    attributes:
+      label: Voira version
+      description: Settings → Obecné → version (e.g., v0.1.9)
+      placeholder: "0.1.9"
+    validations:
+      required: true
+
+  - type: input
+    id: distro
+    attributes:
+      label: Linux distribution + version
+      placeholder: "Ubuntu 24.04 / Arch Linux / Fedora 40 / …"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: display-server
+    attributes:
+      label: Display server
+      options:
+        - X11
+        - Wayland
+        - "Don't know"
+    validations:
+      required: true
+
+  - type: input
+    id: desktop-environment
+    attributes:
+      label: Desktop environment
+      placeholder: "GNOME 46 / KDE Plasma 6 / XFCE / Hyprland / …"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug description
+      description: What happened? What did you expect to happen?
+      placeholder: |
+        When I press my hotkey…
+        Expected: Voira should record and transcribe.
+        Actual: Nothing happens.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open Voira
+        2. Click tray icon
+        3. Press F8
+        4. …
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / Console output
+      description: |
+        - Voira logs: `tail -100 ~/.config/Voira/logs/*.log` or run from terminal
+        - Console output if you launched via terminal
+      render: shell
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submit checklist
+      options:
+        - label: I checked README Troubleshooting section
+          required: true
+        - label: I searched existing issues for duplicates
+          required: true
+        - label: I included version + distro + display server info
+          required: true

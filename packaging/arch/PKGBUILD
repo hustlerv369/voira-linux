@@ -1,0 +1,32 @@
+# Maintainer: Hustler <vojtech.horava@gmail.com>
+pkgname=voira-bin
+pkgver=0.1.4
+pkgrel=1
+pkgdesc="Voira — česká voice-to-text appka. Mluv a piš všude (Win/Mac/Linux)."
+arch=('x86_64')
+url="https://voiravoice.cz"
+license=('custom')
+depends=('webkit2gtk-4.1' 'gtk3' 'libayatana-appindicator' 'alsa-lib')
+optdepends=('libxdo: for X11 text injection')
+provides=('voira')
+conflicts=('voira')
+source=("Voira-linux.AppImage::https://voiravoice.cz/downloads/Voira-linux.AppImage"
+        "voira.desktop"
+        "voira.png")
+sha256sums=('69f44d20d15f28280040b52a4b889d572c0bd7e93d30310ba35de992e6f28d12'
+            'SKIP'
+            'SKIP')
+noextract=("Voira-linux.AppImage")
+
+package() {
+  # Install AppImage to /opt
+  install -Dm755 "${srcdir}/Voira-linux.AppImage" "${pkgdir}/opt/voira/voira.AppImage"
+
+  # Symlink to /usr/bin for CLI access
+  install -dm755 "${pkgdir}/usr/bin"
+  ln -s /opt/voira/voira.AppImage "${pkgdir}/usr/bin/voira"
+
+  # Desktop file + icon
+  install -Dm644 "${srcdir}/voira.desktop" "${pkgdir}/usr/share/applications/voira.desktop"
+  install -Dm644 "${srcdir}/voira.png" "${pkgdir}/usr/share/icons/hicolor/256x256/apps/voira.png"
+}
