@@ -24,6 +24,9 @@ on:
         type: boolean
         default: false
 
+permissions:
+  contents: write
+
 jobs:
   mirror-release:
     name: Mirror Linux artifacts to GitHub Releases
